@@ -62,50 +62,64 @@ namespace Parcial1Ap1_LeandroD.UI.Registros
 
         private void Guardar_Click(object sender, EventArgs e)
         {
-            var guardado = new Empleados();
-            guardado.EmpleadoId = (Utilitarios.TOINT(empleadoIdTextBox.Text));
-            guardado.Nombres = nombresTextBox.Text;
-            guardado.FechaNacimiento = fechaNacimientoDateTimePicker.Value;
-            guardado.Sueldo = (Utilitarios.TOINT(sueldoTextBox.Text));
 
-            if (!Validar())
-            {
-                MessageBox.Show("Ha ocurrido un error");
-            }
-            else
-            {
-                BLL.EmpleadosBLL.Guardar(guardado);
-                MessageBox.Show("Se ha guardado correctamente");
-            }
+           
+                var guardado = new Empleados();
+                guardado.EmpleadoId = (Utilitarios.TOINT(empleadoIdTextBox.Text));
+                guardado.Nombres = nombresTextBox.Text;
+                guardado.FechaNacimiento = fechaNacimientoDateTimePicker.Value;
+                guardado.Sueldo = (Utilitarios.TOINT(sueldoTextBox.Text));
+
+                if (!Validar())
+                {
+                    MessageBox.Show("Ha ocurrido un error");
+                }
+                else
+                {
+                    BLL.RepositorioBLL.Guardar(guardado);
+                    MessageBox.Show("Se ha guardado correctamente");
+                }
+            
+               
         }
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
-            var busca = BLL.EmpleadosBLL.Buscar(Utilitarios.TOINT(empleadoIdTextBox.Text));
-            if (busca != null)
+            int Id = int.Parse(empleadoIdTextBox.Text);
+            Empleados usuario;
+            using (var conn = new DAL.Repositorio<Empleados>())
             {
-                nombresTextBox.Text = busca.Nombres;
-                fechaNacimientoDateTimePicker.Value = busca.FechaNacimiento;
-                sueldoTextBox.Text = Convert.ToString(busca.Sueldo);
-                MessageBox.Show("Se ha encontrado correctamente");
-            }
-            else
-            {
-                MessageBox.Show("No existe ese usuario");
+              usuario = conn.Buscar(p=> p.EmpleadoId ==Id );
+              if(usuario!=null)
+              {
+                    nombresTextBox.Text = usuario.Nombres;
+                    fechaNacimientoDateTimePicker.Value = usuario.FechaNacimiento;
+                    sueldoTextBox.Text = Convert.ToString(usuario.Sueldo);
+                    MessageBox.Show("Se ha encontrado correctamente");
+
+              }
+              else
+              {
+                    MessageBox.Show("No existe ese usuario");
+                }
             }
         }
 
         private void Eliminar_Click(object sender, EventArgs e)
         {
-            var elimina = BLL.EmpleadosBLL.Buscar(Utilitarios.TOINT(empleadoIdTextBox.Text));
-            if (elimina != null)
+            int Id = int.Parse(empleadoIdTextBox.Text);
+            using (var conn = new DAL.Repositorio<Empleados>())
             {
-                BLL.EmpleadosBLL.Eliminar(elimina);
-                MessageBox.Show("Se ha eliminado el usuario");
-            }
-            else 
-            {
-                MessageBox.Show("No existe ese usuario");
+                if(conn.Eliminar(conn.Buscar(p=> p.EmpleadoId == Id)))
+                {
+                    
+                    MessageBox.Show("Se ha eliminado Correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("No se ha Eliminado");
+
+                }
             }
         }
     }

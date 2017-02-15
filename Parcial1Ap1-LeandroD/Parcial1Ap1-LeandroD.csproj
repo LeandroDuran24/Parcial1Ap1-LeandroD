@@ -68,8 +68,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\EmpleadosBLL.cs" />
+    <Compile Include="BLL\RepositorioBLL.cs" />
+    <Compile Include="DAL\IRepository1.cs" />
     <Compile Include="DAL\Parcial1Db.cs" />
+    <Compile Include="BLL\Repositorio.cs" />
     <Compile Include="Entidades\Empleados.cs" />
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -82,13 +84,13 @@
     <Compile Include="UI\Consultas\ConsultasEmpleados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Consultas\ConsultasEmpleados.Designer.cs">
+    <Compile Include="UI\Consultas\ConsultasEmpleados.designer.cs">
       <DependentUpon>ConsultasEmpleados.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Registros\EmpleadosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Registros\EmpleadosForm.Designer.cs">
+    <Compile Include="UI\Registros\EmpleadosForm.designer.cs">
       <DependentUpon>EmpleadosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilitarios.cs" />
