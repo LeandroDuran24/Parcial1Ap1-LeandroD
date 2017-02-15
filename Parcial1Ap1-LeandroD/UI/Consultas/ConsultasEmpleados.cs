@@ -27,6 +27,7 @@ namespace Parcial1Ap1_LeandroD.UI.Consultas
         {
             comboBox1.Items.Insert(0, "Nombre");
             comboBox1.Items.Insert(1, "Fecha");
+            comboBox1.Items.Insert(2, "Todos");
             comboBox1.DataSource = comboBox1.Items;
             comboBox1.DisplayMember = "Nombre";
 
@@ -45,6 +46,10 @@ namespace Parcial1Ap1_LeandroD.UI.Consultas
                 {
                     empleadosDataGridView.DataSource = BLL.EmpleadosBLL.GetListFecha(desdeDateTimePicker.Value.Date, HastadateTimePicker1.Value.Date);
                 }
+            }
+            if (comboBox1.SelectedIndex == 2)
+            {
+                empleadosDataGridView.DataSource = BLL.EmpleadosBLL.GetList();
             }
         }
 

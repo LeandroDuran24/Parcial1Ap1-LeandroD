@@ -73,6 +73,24 @@ namespace Parcial1Ap1_LeandroD.BLL
             }
         }
 
+        public static List<Empleados>GetList()
+        {
+            List<Empleados> lista = new List<Empleados>();
+            using (var conn = new Parcial1Db())
+            {
+                try
+                {
+                    lista = conn.empleado.ToList();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return lista;
+            }
+        }
+
         public static List<Empleados>GetListNombre(string nombre)
         {
             List<Empleados> lista = new List<Empleados>();
